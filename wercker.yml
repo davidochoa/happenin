@@ -1,0 +1,62 @@
+box: wercker/rvm
+services:
+  - wercker/postgresql
+
+build:
+    steps:
+        # A step that executes `bundle install` command
+        - bundle-install
+
+        # A step that prepares the database.yml using the database in services
+        - rails-database-yml:
+            service: postgresql
+
+        # A custom script step, name value is used in the UI
+        # and the code value contains the command that get executed
+        - script:
+            name: echo ruby information
+            code: |
+                echo "ruby version $(ruby --version) running"
+                echo "from location $(which ruby)"
+                echo -p "gem list: $(gem list)"
+
+        # Add more steps here:
+        - script:
+            name: rubocop
+            code: bundle exec rubocop
+        - script:
+            name: brakeman
+            code: bundle exec brakeman
+        - script:
+            name: Set up test:db
+            code: bundle exec rake db:schema:load RAILS_ENV=test
+        - script:
+            name: rspec
+            code: bundle exec rspec
+    # after-steps:
+    #     - wercker/email-notify@1.0.0:
+    #         from: $NOTIFY_FROM
+    #         to: $NOTIFY_TO
+    #         username: $EMAIL_USER
+    #         password: $EMAIL_PASSWORD
+    #         host: $NOTIFY_HOST
+    #         on: failed
+    #         failed-subject: Failed to build tests
+    #         failed-body: There was a problem building tests for swappbox, please take a look
+# deploy:
+#     steps:
+        # Execute the heroku-deploy, heroku details can be edited
+        # online at http://app.wercker.com/
+        # - heroku-deploy:
+        #     key-name: SWAPPBOX_HEROKU
+        #     run: rake db:migrate
+    # after-steps:
+    #     - wercker/email-notify@1.0.0:
+    #         from: $NOTIFY_FROM
+    #         to: $NOTIFY_TO
+    #         username: $EMAIL_USER
+    #         password: $EMAIL_PASSWORD
+    #         host: $NOTIFY_HOST
+    #         on: failed
+    #         failed-subject: Failed to deploy
+    #         failed-body: There was a problem deploying swappbox, please take a look
