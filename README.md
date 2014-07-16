@@ -1,7 +1,7 @@
 Happenin App
 ========================
 
-[![wercker status](https://app.wercker.com/status/86105c6c96902df83470f6aac8221afd/m/develop "wercker status")](https://app.wercker.com/project/bykey/86105c6c96902df83470f6aac8221afd)
+[![wercker status](https://app.wercker.com/status/3fed7ce6658cefbe1698f4f2723d7b03/m/develop "wercker status")](https://app.wercker.com/project/bykey/3fed7ce6658cefbe1698f4f2723d7b03)
 
 Happenin web application
 
