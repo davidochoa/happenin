@@ -1,0 +1,11 @@
+AllCops:
+  Exclude:
+    - bin/**/*
+    - spec/**/*
+    - db/**/*
+
+Style/MethodLength:
+  Max: 15
+
+Documentation:
+  Enabled: false
