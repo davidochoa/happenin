@@ -11,6 +11,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'haml-rails'
 gem 'simple_form'
 gem 'thin'
+gem 'bcrypt'
 
 group :development do
   gem 'spring'
