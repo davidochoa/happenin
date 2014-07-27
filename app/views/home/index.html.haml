@@ -1,5 +1,7 @@
 .search-container.large-6
-  %form
+  .row.large-8
+    %h2 Start searching what's happenin' around.
+  %form{ action: events_path }
     .row
       .large-12.columns
-        = text_field_tag :search, nil, placeholder: "Search what's happening around"
+        = text_field_tag :search, nil
