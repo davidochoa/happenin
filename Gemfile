@@ -12,15 +12,16 @@ gem 'haml-rails'
 gem 'simple_form'
 gem 'thin'
 gem 'bcrypt'
+gem 'koala', '~> 1.10.0rc'
 
 group :development do
   gem 'spring'
   gem 'better_errors'
-  gem 'binding_of_caller', :platforms=>[:mri_21]
+  gem 'binding_of_caller', platforms: [:mri_21]
   gem 'quiet_assets'
   gem 'rails_apps_testing'
   gem 'rails_layout'
-  gem 'brakeman', :require => false
+  gem 'brakeman', require: false
   gem 'rubocop', require: false
 end
 
