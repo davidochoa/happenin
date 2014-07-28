@@ -1,9 +1,9 @@
 !!!
 %html
   %head
-    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+    %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
     %title= content_for?(:title) ? yield(:title) : 'Happenin'
-    %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Happenin'}"}
+    %meta{ name: 'description', content: "#{content_for?(:description) ? yield(:description) : 'Happenin'}" }
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'vendor/modernizr'
     = javascript_include_tag 'application'
