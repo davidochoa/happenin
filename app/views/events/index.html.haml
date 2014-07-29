@@ -1,0 +1,20 @@
+.row
+  .large-12.columns
+    %br>
+    %form{ action: events_path }
+      .row.collapse
+        .large-10.columns
+          = text_field_tag :q, params[:q], placeholder: "Search what's happenin' around..."
+        .large-2.columns
+          %button{ class: 'button postfix' }
+            Search
+.row
+  %ul.medium-block-grid-3
+    - @events.each do |event|
+      %li
+        .panel
+          %h3= event['name']
+          %br>
+          = "Start time: #{Time.parse(event['start_time']).to_formatted_s(:long)}"
+          %br>
+          = "Location: #{event['location']}"
