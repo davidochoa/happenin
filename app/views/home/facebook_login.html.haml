@@ -1,0 +1,11 @@
+.container.large-6
+  .center
+    .row.large-8
+      %h2 Please login to Facebook to start searching...
+    #status
+    %br
+    %fb:login-button{ onlogin: 'FacebookLogin.checkLoginState();',
+                      data: { 'max-rows' => '1', size: 'medium', 'show-faces' => 'true' } }
+
+- content_for :javascript do
+  = javascript_include_tag 'facebook_login'
