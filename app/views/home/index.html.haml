@@ -1,7 +1,10 @@
-.search-container.large-6
+.container.large-6
   .row.large-8
-    %h2 Start searching what's happenin' around.
+    %h2.center Start searching what's happenin' around.
   %form{ action: events_path }
-    .row
-      .large-12.columns
-        = text_field_tag :search, nil
+    .row.collapse
+      .large-10.columns
+        = text_field_tag :q, nil
+      .large-2.columns
+        %button{ class: 'button postfix' }
+          Search
