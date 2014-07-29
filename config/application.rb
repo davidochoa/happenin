@@ -37,6 +37,6 @@ module Happenin
     # config.i18n.default_locale = :de
 
     # For Foundation 5
-    config.assets.precompile += %w( vendor/modernizr )
+    config.assets.precompile += %w( vendor/modernizr facebook_login.js )
   end
 end
