@@ -6,6 +6,7 @@ class Event
 
   class << self
     def search_by(fb_graph:, params:)
+      return [] if params[:q].blank?
       results = fb_graph.search(params[:q], type: 'event')
       results = filter_raw_results(results: results)
       results.map { |x| new(params: x) }
