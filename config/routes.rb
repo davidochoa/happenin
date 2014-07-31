@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :events, only: :index do
-    get ':source/:id', to: :show, as: :event, on: :collection
-  end
+  get '/events/:source_id/:id', to: 'events#show', as: :event
+
+  resources :events, only: :index
 
   root to: 'home#index'
 end

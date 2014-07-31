@@ -4,7 +4,7 @@
   %form{ action: events_path }
     .row.collapse
       .large-10.columns
-        = text_field_tag :q, nil
+        = text_field_tag :q, nil, placeholder: "Search what's happenin' around...( for Location, venue, title...)"
       .large-2.columns
         %button{ class: 'button postfix' }
           %i.fi-magnifying-glass

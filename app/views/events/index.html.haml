@@ -4,7 +4,7 @@
     %form{ action: events_path }
       .row.collapse
         .large-10.columns
-          = text_field_tag :q, params[:q], placeholder: "Search what's happenin' around..."
+          = text_field_tag :q, params[:q], placeholder: "Search what's happenin' around...( for Location, venue, title...)"
         .large-2.columns
           %button{ class: 'button postfix' }
             %i.fi-magnifying-glass
@@ -13,16 +13,19 @@
   %ul.medium-block-grid-3
     - @events.each do |event|
       %li
-        .panel
-          %h3
-            %i.fi-align-right
-            = event['name']
-          %br>
-          %i.fi-clock
-          = " #{Time.parse(event['start_time']).to_formatted_s(:long)}"
-          %br>
-          %i.fi-marker
-          = " #{event['location']}"
-          %br>
-          %i.fi-social-facebook
-          %hr>
+        = link_to event_path(event) do
+          .panel
+            %h3
+              %i.fi-social-facebook
+              = event.name
+            %br>
+            - if event.start_time
+              .parameter
+                %i.fi-clock
+                = " #{Time.parse(event.start_time).to_formatted_s(:long)}"
+            %br>
+            - if event.location
+              .parameter
+                %i.fi-marker
+                = " #{event.location}"
+            %hr>
