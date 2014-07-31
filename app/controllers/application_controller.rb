@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     @graph = Koala::Facebook::API.new(session[:fb_access_token])
     @graph.debug_token(session[:fb_access_token])
   rescue Koala::Facebook::AuthenticationError,
-      Koala::Facebook::ClientError => e
+    Koala::Facebook::ClientError => e
     reset_facebook_access_token(e)
     render 'home/facebook_login'
   end

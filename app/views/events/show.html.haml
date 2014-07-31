@@ -1,0 +1,47 @@
+.container.large-8
+  .panel
+    .row
+      %h2.center
+        = @event.name
+    %hr
+    .row
+      .large-4.columns
+        .parameter
+          - if @event.start_time || @event.end_time || @event.timezone
+            %i.fi-clock
+          - if @event.start_time
+            = " #{Time.parse(@event.start_time).to_formatted_s(:long)}"
+          - if @event.end_time
+            %br>
+            = Time.parse(@event.end_time).to_formatted_s(:long)
+          - if @event.timezone
+            %br>
+            = @event.timezone
+      - if @event.location
+        .large-4.columns
+          .parameter
+            %i.fi-marker
+            = " #{@event.location}"
+      .large-4.columns
+        - if @event.ticket_uri
+          .parameter
+            %i.fi-ticket
+            = link_to 'Ticket information', @event.ticket_uri, target: '_blank'
+        - if @event.owner['name'] && @event.owner['id']
+          .parameter
+            %i.fi-torsos-all
+            = link_to @event.owner['name'], "//www.facebook.com/#{@event.owner['id']}", target: '_blank'
+        - elsif @event.owner['name']
+          .parameter
+            %i.fi-torsos-all
+            = @event.owner['name']
+    - if @event.description
+      %hr
+      .row
+        %p= simple_format(@event.description)
+    %hr
+    .row
+      .right.small
+        = link_to "//www.facebook.com/events/#{@event.id}", target: '_blank' do
+          %i.fi-social-facebook
+          Check more information

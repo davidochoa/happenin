@@ -1,14 +1,9 @@
 class EventsController < ApplicationController
   def index
-    @events = Event.search_by(fb_graph: @graph, params: permitted_params)
+    @events = Event.search_by(fb_graph: @graph, params: params)
   end
 
   def show
-  end
-
-  private
-
-  def permitted_params
-    params.permit(:q)
+    @event = Event.find(fb_graph: @graph, params: params)
   end
 end

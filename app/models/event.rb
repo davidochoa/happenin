@@ -1,13 +1,18 @@
 class Event
   SOURCE = 01
 
-  attr_reader :id, :name, :location, :start_time, :end_time, :timezone
+  attr_reader :id, :name, :description, :location, :start_time, :end_time,
+              :timezone, :privacy, :venue, :owner, :ticket_uri
 
   class << self
     def search_by(fb_graph:, params:)
       results = fb_graph.search(params[:q], type: 'event')
       results = filter_raw_results(results: results)
       results.map { |x| new(params: x) }
+    end
+
+    def find(fb_graph:, params:)
+      new(fb_graph: fb_graph, params: params)
     end
 
     private
@@ -20,14 +25,9 @@ class Event
     end
   end
 
-  def initialize(params:, fb_graph: nil)
-    @id = params['id']
-    @name = params['name']
-    @location = params['location']
-    @start_time = params['start_time']
-    @end_time = params['end_time']
-    @timezone = params['timezone']
-    event_information(fb_graph: fb_graph) if fb_graph
+  def initialize(fb_graph: nil, params:)
+    params = event_information(fb_graph: fb_graph, id: params[:id]) if fb_graph
+    event_parameterize(params: params)
   end
 
   def source_id
@@ -36,7 +36,14 @@ class Event
 
   private
 
-  def event_information(fb_graph:)
+  def event_information(fb_graph:, id:)
     return unless fb_graph
+    fb_graph.get_object(id)
+  end
+
+  def event_parameterize(params: params)
+    params.each do |key, value|
+      instance_variable_set("@#{key}", value)
+    end
   end
 end
