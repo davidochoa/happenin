@@ -19,3 +19,9 @@
     color: #000;
   }
 }
+
+@media(max-width:767px){
+  .panel-wrapper {
+    width: 100%;
+  }
+}

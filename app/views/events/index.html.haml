@@ -12,7 +12,7 @@
 .row
   %ul.medium-block-grid-3
     - @events.each do |event|
-      %li
+      %li.panel-wrapper
         = link_to event_path(event) do
           .panel
             %h4
