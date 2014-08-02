@@ -43,13 +43,13 @@ build:
     #         on: failed
     #         failed-subject: Failed to build tests
     #         failed-body: There was a problem building tests for swappbox, please take a look
-# deploy:
-#     steps:
+deploy:
+    steps:
         # Execute the heroku-deploy, heroku details can be edited
         # online at http://app.wercker.com/
-        # - heroku-deploy:
-        #     key-name: SWAPPBOX_HEROKU
-        #     run: rake db:migrate
+        - heroku-deploy:
+            key-name: HAPPENIN_HEROKU
+            run: rake db:migrate
     # after-steps:
     #     - wercker/email-notify@1.0.0:
     #         from: $NOTIFY_FROM
