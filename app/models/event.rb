@@ -22,7 +22,7 @@ class Event
       results.select! do |x|
         !x['start_time'].blank? && x['start_time'] > Time.now
       end
-      results.sort! { |a,b| a['start_time'] <=> b['start_time'] }
+      results.sort! { |a, b| a['start_time'] <=> b['start_time'] }
     end
   end
 
