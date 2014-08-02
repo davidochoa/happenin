@@ -1,7 +1,7 @@
 Happenin App
 ========================
 
-[![wercker status](https://app.wercker.com/status/3fed7ce6658cefbe1698f4f2723d7b03/m/develop "wercker status")](https://app.wercker.com/project/bykey/3fed7ce6658cefbe1698f4f2723d7b03)
+[ ![Codeship Status for davidochoa/happenin](https://codeship.io/projects/9496c1b0-fca0-0131-49be-6e5f7dbab667/status)](https://codeship.io/projects/29363)
 
 Happenin web application
 
