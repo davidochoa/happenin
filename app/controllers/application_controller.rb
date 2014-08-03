@@ -9,8 +9,10 @@ class ApplicationController < ActionController::Base
 
   def init_facebook_graph
     init_facebook_user unless session[:fb_access_token]
+    app_access_token = "#{ENV['FB_APP_ID']}|#{ENV['FB_APP_SECRET']}"
+    graph = Koala::Facebook::API.new(app_access_token)
+    graph.debug_token(session[:fb_access_token])
     @graph = Koala::Facebook::API.new(session[:fb_access_token])
-    @graph.debug_token(session[:fb_access_token])
   rescue Koala::Facebook::AuthenticationError,
          Koala::Facebook::ClientError => e
     handle_facebook_error(e)
