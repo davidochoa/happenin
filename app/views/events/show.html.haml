@@ -23,18 +23,22 @@
             %i.fi-marker
             = " #{@event.location}"
       .large-4.columns
-        - if @event.ticket_uri
+        - if @event.ticket_url
           .parameter
             %i.fi-ticket
             = link_to 'Ticket information', @event.ticket_uri, target: '_blank'
-        - if @event.owner['name'] && @event.owner['id']
+        - if @event.owner_name && @event.owner_url
           .parameter
             %i.fi-torsos-all
-            = link_to @event.owner['name'], "//www.facebook.com/#{@event.owner['id']}", target: '_blank'
-        - elsif @event.owner['name']
+            = link_to @event.owner_name, @event.owner_url, target: '_blank'
+        - elsif @event.owner_name
           .parameter
             %i.fi-torsos-all
-            = @event.owner['name']
+            = @event.owner_name
+    - if @event.venue
+      %hr
+      .row
+        %iframe.map-content{ frameborder: '0', src: "https://www.google.com/maps/embed/v1/place?key=AIzaSyDg6GEQ8n9OgKdu0Mx6wRXsc1nnm1aW0Gw&q=#{@event.venue[:latitude].to_s + ',' + @event.venue[:longitude].to_s}&zoom=18&language=en" }
     - if @event.description
       %hr
       .row
