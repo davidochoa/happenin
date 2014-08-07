@@ -29,7 +29,8 @@ class Event
 
   def initialize(fb_graph: nil, params:)
     @raw_object =
-      fb_graph.blank? ? params : src_object(fb_graph: fb_graph, id: params['id'])
+      fb_graph.blank? ? params :
+      src_object(fb_graph: fb_graph, id: params['id'])
   end
 
   def source_id
