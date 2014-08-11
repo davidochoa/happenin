@@ -1,9 +1,9 @@
 class EventsController < ApplicationController
   def index
-    @events = Event.search_by(fb_graph: @graph, params: params)
+    @events = Event.search_by(params, @graph)
   end
 
   def show
-    @event = Event.find(fb_graph: @graph, params: params)
+    @event = Event.find(params, @graph)
   end
 end
