@@ -14,6 +14,7 @@ gem 'simple_form'
 gem 'thin'
 gem 'bcrypt'
 gem 'koala', '~> 1.10.0rc'
+gem 'eventbrite-client', git: 'https://github.com/davidochoa/eventbrite-client.rb'
 
 group :development do
   gem 'spring'
