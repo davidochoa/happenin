@@ -1,6 +1,6 @@
 class Event
 
-  TYPES = {
+  SOURCES = {
     '1' => 'FacebookEvent',
     '2' => 'EventbriteEvent'
   }
@@ -16,7 +16,7 @@ class Event
     end
 
     def event_class(source_id)
-      TYPES[source_id.to_s].constantize if TYPES.has_key?(source_id.to_s)
+      SOURCES[source_id.to_s].constantize if SOURCES.has_key?(source_id.to_s)
     end
   end
 
