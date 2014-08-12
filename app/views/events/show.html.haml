@@ -46,6 +46,6 @@
     %hr
     .row
       .right.small
-        = link_to "//www.facebook.com/events/#{@event.id}", target: '_blank' do
+        = link_to @event.url, target: '_blank' do
           %i.fi-social-facebook
           Check more information

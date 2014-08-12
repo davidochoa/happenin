@@ -1,36 +1,27 @@
-class FacebookEvent
-  SOURCE = 1
+class EventbriteEvent
+  SOURCE = 2
 
   attr_reader :id, :name, :description, :location, :start_time, :end_time,
               :timezone, :privacy, :venue_name, :owner_name, :owner_url,
               :ticket_url, :url
 
   class << self
-    def search_by(params, fb_graph)
+    def search_by(params, ebrite)
       return [] if params[:q].blank?
-      results = fb_graph.search(params[:q], type: 'event')
-      results = filter_raw_results(results)
-      results.map { |attrs| new(attrs) }
+      results = ebrite.event_search(keywords: CGI.escape(params[:q]), max: 100)
+      results['events'].select { |r| r['event'] }
+        .map { |attrs| new(attrs['event']) }
     end
 
-    def find(params, fb_graph)
-      new(params, fb_graph)
-    end
-
-    private
-
-    def filter_raw_results(results)
-      results.select! do |x|
-        !x['start_time'].blank? && x['start_time'] > Time.now
-      end
-      results.sort! { |a, b| a['start_time'] <=> b['start_time'] }
+    def find(params, ebrite)
+      new(params, ebrite)
     end
   end
 
-  def initialize(params, fb_graph = nil)
+  def initialize(params, ebrite = nil)
     @raw_object =
-      fb_graph.blank? ? params :
-      src_object(params['id'], fb_graph)
+      ebrite.blank? ? params :
+      src_object(params[:id], ebrite)
   end
 
   def source_id
@@ -42,12 +33,12 @@ class FacebookEvent
   end
 
   def name
-    object_param(:name)
+    object_param(:title)
   end
 
   def url
     return if @raw_object.blank? || @raw_object['id'].blank?
-    "//www.facebook.com/events/#{@raw_object['id']}"
+    "//www.eventbrite.com/e/#{@raw_object['id']}"
   end
 
   def description
@@ -59,11 +50,11 @@ class FacebookEvent
   end
 
   def start_time
-    object_param(:start_time)
+    object_param(:start_date)
   end
 
   def end_time
-    object_param(:end_time)
+    object_param(:end_date)
   end
 
   def timezone
@@ -102,8 +93,8 @@ class FacebookEvent
 
   private
 
-  def src_object(id, fb_graph)
-    fb_graph.get_object(id)
+  def src_object(id, ebrite)
+    ebrite.event_get(id: id)['event']
   end
 
   def object_param(param)
@@ -111,4 +102,5 @@ class FacebookEvent
       @raw_object[param.to_s].blank?
     @raw_object[param.to_s]
   end
+
 end

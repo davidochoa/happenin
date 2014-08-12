@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :init_facebook_graph
+  before_filter :init_eventbrite
 
   protected
 
@@ -12,7 +13,7 @@ class ApplicationController < ActionController::Base
     app_access_token = "#{ENV['FB_APP_ID']}|#{ENV['FB_APP_SECRET']}"
     graph = Koala::Facebook::API.new(app_access_token)
     graph.debug_token(session[:fb_access_token])
-    @graph = Koala::Facebook::API.new(session[:fb_access_token])
+    @fb_graph = Koala::Facebook::API.new(session[:fb_access_token])
   rescue Koala::Facebook::AuthenticationError,
          Koala::Facebook::ClientError => e
     handle_facebook_error(e)
@@ -34,5 +35,9 @@ class ApplicationController < ActionController::Base
     else
       render 'home/facebook_login'
     end
+  end
+
+  def init_eventbrite
+    @ebrite = EventbriteClient.new(app_key: ENV['EVENTBRITE_APP_ID'])
   end
 end
