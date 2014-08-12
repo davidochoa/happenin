@@ -1,19 +1,14 @@
 class Event
-
   SOURCES = {
     '1' => 'FacebookEvent',
     '2' => 'EventbriteEvent'
   }
 
-  SOURCES_CLIENT = {
-    '1' => 'fb_graph',
-    '2' => 'ebrite'
-  }
-
   class << self
     def search_by(params, fb_graph = nil, ebrite = nil)
       return [] if params[:q].blank?
-      results = FacebookEvent.search_by(params, fb_graph) + EventbriteEvent.search_by(params, ebrite)
+      FacebookEvent.search_by(params, fb_graph) +
+        EventbriteEvent.search_by(params, ebrite)
     end
 
     def find(params, fb_graph = nil, ebrite = nil)
@@ -23,7 +18,7 @@ class Event
     end
 
     def source_class(source_id)
-      SOURCES[source_id.to_s].constantize if SOURCES.has_key?(source_id.to_s)
+      SOURCES[source_id.to_s].constantize if SOURCES.key?(source_id.to_s)
     end
 
     def source_client(source_id, fb_graph = nil, ebrite = nil)

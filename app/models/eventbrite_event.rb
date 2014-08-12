@@ -102,5 +102,4 @@ class EventbriteEvent
       @raw_object[param.to_s].blank?
     @raw_object[param.to_s]
   end
-
 end
