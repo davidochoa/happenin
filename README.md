@@ -1,7 +1,7 @@
 Happenin App
 ========================
 
-[ ![Codeship Status for davidochoa/happenin](https://codeship.io/projects/9496c1b0-fca0-0131-49be-6e5f7dbab667/status)](https://codeship.io/projects/29363)
+[ ![Codeship Status for davidochoa/happenin](https://codeship.io/projects/9e817d90-1bf8-0132-47fc-0e44169fbb48/status)](https://codeship.io/projects/35063)
 
 Happenin web application
 
